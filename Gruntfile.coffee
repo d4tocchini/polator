@@ -28,7 +28,8 @@ module.exports = ->
         command: './node_modules/.bin/component install'
       main_build:
         command: './node_modules/.bin/component build -o browser -n interpolator -c'
-      
+      standalone_build:
+        command: './node_modules/.bin/component build -o . -n interpolator -c --standalone interpolator'
 
     # JavaScript minification for the browser
     uglify:
@@ -71,7 +72,7 @@ module.exports = ->
   @loadNpmTasks 'grunt-coffeelint'
 
   # Our local tasks
-  @registerTask 'build', ['coffee', 'exec:main_install', 'exec:main_build']
+  @registerTask 'build', ['coffee', 'exec:main_install', 'exec:main_build', 'exec:standalone_build']
 
   #@registerTask 'test', 
 
