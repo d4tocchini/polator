@@ -1,0 +1,34 @@
+{
+  "name": "interpolator",
+  "version": "0.1.0",
+  "homepage": "http://github.com/d4tocchini/interpolator",
+  "authors": [
+    "Dan Tocchini <d4@thegrid.io>"
+  ],
+  "description": "Arbitrary value interpolation",
+  "main": "index.js",
+  "keywords": [
+    "interpolation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".git",
+    ".gitignore",
+    "components",
+    "node_modules",
+    "bower_components",
+    "spec",
+    "style",
+    "demo",
+    "docs",
+    "_layouts",
+    "_includes",
+    "_config.yml",
+    "CNAME",
+    "component.json",
+    "package.json",
+    "Gruntfile.coffee",
+    "index.html",
+    ".travis.yml"
+  ]
+}
