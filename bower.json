@@ -6,7 +6,7 @@
     "Dan Tocchini <d4@thegrid.io>"
   ],
   "description": "Arbitrary value interpolation",
-  "main": "interpolator.js",
+  "main": "lib/polator.js",
   "keywords": [
     "interpolation"
   ],

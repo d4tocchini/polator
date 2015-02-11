@@ -2,7 +2,14 @@ module.exports = ->
   # Project configuration
   @initConfig
     pkg: @file.readJSON 'package.json'
-
+    
+    # BDD tests on Node.js
+    mochaTest:
+      nodejs:
+        src: ['spec/**/*.coffee']
+        options:
+          reporter: 'spec'
+    
     # CoffeeScript compilation
     coffee:
       src:
@@ -22,34 +29,10 @@ module.exports = ->
         dest: 'spec'
         ext: '.js'
 
-    
-    exec:
-      main_install:
-        command: './node_modules/.bin/component install'
-      main_build:
-        command: './node_modules/.bin/component build -o browser -n interpolator -c'
-      standalone_build:
-        command: './node_modules/.bin/component build -o . -n interpolator -c --standalone interpolator'
-
-    # JavaScript minification for the browser
-    uglify:
-      options:
-        report: 'min'
-      src:
-        files:
-          './browser/interpolator.min.js': ['./browser/interpolator.js']
-
     # Automated recompilation and testing when developing
     watch:
       files: ['**/*.coffee']
       tasks: ['build']
-
-    # BDD tests on Node.js
-    cafemocha:
-      nodejs:
-        src: ['spec/*.coffee']
-        options:
-          reporter: 'dot'
 
     # Coding standards
     coffeelint:
@@ -63,17 +46,19 @@ module.exports = ->
 
   # Grunt plugins used for building
   @loadNpmTasks 'grunt-contrib-coffee'
-  @loadNpmTasks 'grunt-exec'
-  @loadNpmTasks 'grunt-contrib-uglify'
 
   # Grunt plugins used for testing
   @loadNpmTasks 'grunt-contrib-watch'
-  @loadNpmTasks 'grunt-cafe-mocha'
+  @loadNpmTasks 'grunt-mocha-test'
   @loadNpmTasks 'grunt-coffeelint'
 
   # Our local tasks
-  @registerTask 'build', ['coffee', 'exec:main_install', 'exec:main_build', 'exec:standalone_build']
+  @registerTask 'build', ['coffee']
 
-  #@registerTask 'test', 
+  @registerTask 'test', =>
+    #@task.run 'coffeelint'
+    #@task.run 'clean'
+    @task.run 'build'
+    @task.run 'mochaTest'
 
   @registerTask 'default', ['build']
